@@ -5,11 +5,13 @@
  */
 package labrepo_leonardoborjas;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Leonardo Borjas
  */
-public class Persona {
+public class Persona implements Serializable{
     private String nombre;
     private String apellido;
     private String genero;
