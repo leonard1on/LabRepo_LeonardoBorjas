@@ -35,7 +35,7 @@ public class Main extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         popup = new javax.swing.JPopupMenu();
-        Agregar_Hijo = new javax.swing.JMenuItem();
+        Agregar = new javax.swing.JMenuItem();
         Eliminar = new javax.swing.JMenuItem();
         Modificar = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -70,13 +70,13 @@ public class Main extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
-        Agregar_Hijo.setText("Agregar Hijo");
-        Agregar_Hijo.addActionListener(new java.awt.event.ActionListener() {
+        Agregar.setText("Agregar Hijo");
+        Agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Agregar_HijoActionPerformed(evt);
+                AgregarActionPerformed(evt);
             }
         });
-        popup.add(Agregar_Hijo);
+        popup.add(Agregar);
 
         Eliminar.setText("Eliminar");
         Eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -329,9 +329,56 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_arbolMouseClicked
 
-    private void Agregar_HijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Agregar_HijoActionPerformed
+    private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Agregar_HijoActionPerformed
+        DefaultTreeModel m = (DefaultTreeModel) arbol.getModel();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) arbol.getLastSelectedPathComponent();
+        Persona persona = (Persona) n.getUserObject();
+        if (persona instanceof Hijo) {
+            String date = ((Hijo) persona).getFechanacimiento();
+            String name = persona.getNombre();
+            String lastname = persona.getApellido();
+            String nigga = persona.getRaza();
+            int height = persona.getAltura();
+            int age = persona.getEdad();
+            String life = ((Hijo) persona).getVidasexual();
+            String nickname = ((Hijo) persona).getApodo();
+            String gang = ((Hijo) persona).getMara();
+            String music = ((Hijo) persona).getMusica();
+            String descript = ((Hijo) persona).getDescripcion();
+            String genero = persona.getGenero();
+
+            String trabajo = JOptionPane.showInputDialog("Cual es su nuevo trabajo");
+            String clasesocial = JOptionPane.showInputDialog("Cual clase social esta usted ahora");
+            String iq = JOptionPane.showInputDialog("Cual es su iq?");
+            String carrera = JOptionPane.showInputDialog("Cual carrera estudio?");
+            String estado = JOptionPane.showInputDialog("Cual es su estado mental?");
+            String esposa = JOptionPane.showInputDialog("Cual es su esposa?");
+            Padre padre = new Padre(trabajo, clasesocial, iq, carrera,
+                    estado, esposa, date, nickname, gang, music, descript, life, name,
+                    lastname, genero, nigga, height, age);
+
+            n.setUserObject(padre);
+
+            name = JOptionPane.showInputDialog("Nombre del hijo");
+            lastname = JOptionPane.showInputDialog("Apellido del hijo");
+            nigga = JOptionPane.showInputDialog("Raza del hijo");
+            height = Integer.parseInt(JOptionPane.showInputDialog("Altura del hijo"));
+            age = Integer.parseInt(JOptionPane.showInputDialog("Edad del hijo"));
+            life = JOptionPane.showInputDialog("Vida sexual del hijo");
+            nickname = JOptionPane.showInputDialog("Apodo del hijo");
+            gang = JOptionPane.showInputDialog("Mara del hijo");
+            music = JOptionPane.showInputDialog("Musica del hijo");
+            descript = JOptionPane.showInputDialog("Descrpcion");
+            genero = JOptionPane.showInputDialog("Genero del hijo");
+            date = JOptionPane.showInputDialog("Fecha de nacimiente mm/dd/yy");
+
+            Hijo hijo = new Hijo(date, nickname, gang, music, descript,
+                life, name, lastname, genero, nigga, height, age);
+            n.add(new DefaultMutableTreeNode(hijo));
+            
+        }
+    }//GEN-LAST:event_AgregarActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         // TODO add your handling code here:
@@ -377,13 +424,13 @@ public class Main extends javax.swing.JFrame {
             String descript = JOptionPane.showInputDialog("modificar descripcion ");
             String genero = JOptionPane.showInputDialog("modificar genero");
             String date = JOptionPane.showInputDialog("modificar fecha");
-            String trabajo=JOptionPane.showInputDialog("modificar trabajo");
-            String clasesocial=JOptionPane.showInputDialog("modificar Clase Social");
-            String iq=JOptionPane.showInputDialog("modificar IQ");
-            String carrera=JOptionPane.showInputDialog("modificar Carrera");
-            String estado=JOptionPane.showInputDialog("modificar estado");
-            String esposa=JOptionPane.showInputDialog("modificar esposa");
-            
+            String trabajo = JOptionPane.showInputDialog("modificar trabajo");
+            String clasesocial = JOptionPane.showInputDialog("modificar Clase Social");
+            String iq = JOptionPane.showInputDialog("modificar IQ");
+            String carrera = JOptionPane.showInputDialog("modificar Carrera");
+            String estado = JOptionPane.showInputDialog("modificar estado");
+            String esposa = JOptionPane.showInputDialog("modificar esposa");
+
             ((Padre) persona).setNombre(name);
             ((Padre) persona).setApellido(lastname);
             ((Padre) persona).setRaza(nigga);
@@ -408,7 +455,7 @@ public class Main extends javax.swing.JFrame {
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         // TODO add your handling code here:
         DefaultMutableTreeNode n = (DefaultMutableTreeNode) arbol.getLastSelectedPathComponent();
-        DefaultTreeModel m=(DefaultTreeModel)arbol.getModel();
+        DefaultTreeModel m = (DefaultTreeModel) arbol.getModel();
         m.removeNodeFromParent(n);
         arbol.setModel(m);
     }//GEN-LAST:event_EliminarActionPerformed
@@ -449,7 +496,7 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem Agregar_Hijo;
+    private javax.swing.JMenuItem Agregar;
     private javax.swing.JMenuItem Eliminar;
     private javax.swing.JRadioButton M;
     private javax.swing.JMenuItem Modificar;
