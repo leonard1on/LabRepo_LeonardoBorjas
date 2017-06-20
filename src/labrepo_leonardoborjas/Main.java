@@ -5,8 +5,10 @@
  */
 package labrepo_leonardoborjas;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.text.DateFormat;
@@ -79,6 +81,7 @@ public class Main extends javax.swing.JFrame {
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         Agregar.setText("Agregar Hijo");
@@ -200,6 +203,14 @@ public class Main extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Generar Reporte");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuItem1.setText("Salir");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -593,6 +604,36 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreActionPerformed
 
+    private void escribir() throws IOException{
+        File archivo=new File("./Reporte.txt");
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        try {
+            fw = new FileWriter(archivo, false);
+            bw = new BufferedWriter(fw);
+            DefaultTreeModel m = (DefaultTreeModel)arbol.getModel();
+            DefaultMutableTreeNode n=(DefaultMutableTreeNode)m.getRoot();
+            for (int i = 0; i < n.getChildCount(); i++) {
+                bw.write(n.getChildAt(i).toString()+";");
+            }
+            bw.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        bw.close();
+        fw.close();
+    }
+    
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        try {
+            // TODO add your handling code here:
+            escribir();
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -661,6 +702,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField mara;
