@@ -70,19 +70,39 @@ public class Main extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
-        Agregar_Hijo.setText("jMenuItem1");
+        Agregar_Hijo.setText("Agregar Hijo");
+        Agregar_Hijo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Agregar_HijoActionPerformed(evt);
+            }
+        });
         popup.add(Agregar_Hijo);
 
-        Eliminar.setText("jMenuItem2");
+        Eliminar.setText("Eliminar");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
         popup.add(Eliminar);
 
-        Modificar.setText("jMenuItem3");
+        Modificar.setText("Modificar");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
         popup.add(Modificar);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Adan");
         arbol.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        arbol.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                arbolMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(arbol);
 
         jLabel1.setText("Nombre");
@@ -259,34 +279,33 @@ public class Main extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here
-        DateFormat df=new SimpleDateFormat("MM/dd/yy");
-        String date=df.format(fecha.getDate());
-        String name=nombre.getText();
-        String lastname=apellido.getText();
-        String nigga=raza.getText();
-        int height=(Integer)altura.getValue();
-        int age=(Integer)edad.getValue();
-        String life=vida.getText();df.format(fecha.getDate());
-        String nickname=apodo.getText();
-        String gang=mara.getText();
-        String music=musica.getText();
-        String descript=descripcion.getText();
-        String genero="";
+        DateFormat df = new SimpleDateFormat("MM/dd/yy");
+        String date = df.format(fecha.getDate());
+        String name = nombre.getText();
+        String lastname = apellido.getText();
+        String nigga = raza.getText();
+        int height = (Integer) altura.getValue();
+        int age = (Integer) edad.getValue();
+        String life = vida.getText();
+        df.format(fecha.getDate());
+        String nickname = apodo.getText();
+        String gang = mara.getText();
+        String music = musica.getText();
+        String descript = descripcion.getText();
+        String genero = "";
         if (M.isSelected()) {
-            genero="Masculino";
-        }else{
-            genero="Femenino";
+            genero = "Masculino";
+        } else {
+            genero = "Femenino";
         }
-        
-        
-        
-        Hijo hijo=new Hijo(date,nickname,gang,music,descript,
-                life,name,lastname,genero,nigga,height,age);
-        
+
+        Hijo hijo = new Hijo(date, nickname, gang, music, descript,
+                life, name, lastname, genero, nigga, height, age);
+
         arbol.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Adan")));
-        
-        DefaultTreeModel m=(DefaultTreeModel)arbol.getModel();
-        DefaultMutableTreeNode n=(DefaultMutableTreeNode)m.getRoot();
+
+        DefaultTreeModel m = (DefaultTreeModel) arbol.getModel();
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) m.getRoot();
         n.add(new DefaultMutableTreeNode(hijo));
         arbol.setModel(m);
         JOptionPane.showMessageDialog(this, "Hijo Agregado");
@@ -302,6 +321,97 @@ public class Main extends javax.swing.JFrame {
         musica.setText("");
         descripcion.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void arbolMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_arbolMouseClicked
+        // TODO add your handling code here:
+        if (evt.isMetaDown()) {
+            popup.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_arbolMouseClicked
+
+    private void Agregar_HijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Agregar_HijoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Agregar_HijoActionPerformed
+
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        // TODO add your handling code here:
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) arbol.getLastSelectedPathComponent();
+        Persona persona = (Persona) n.getUserObject();
+        if (persona instanceof Hijo) {
+            String name = JOptionPane.showInputDialog("Modificar nombre");
+            String lastname = JOptionPane.showInputDialog("Modificar apellido ");
+            String nigga = JOptionPane.showInputDialog("Modificar raza");
+            int height = Integer.parseInt(JOptionPane.showInputDialog("Modificar altura"));
+            int age = Integer.parseInt(JOptionPane.showInputDialog("Modificar edad"));
+            String life = JOptionPane.showInputDialog("Modificar vida sexual");
+            String nickname = JOptionPane.showInputDialog("Modificar apodo");
+            String gang = JOptionPane.showInputDialog("Modificar mara ");
+            String music = JOptionPane.showInputDialog("Modificar musica favorita");
+            String descript = JOptionPane.showInputDialog("modificar descripcion ");
+            String genero = JOptionPane.showInputDialog("modificar genero");
+            String date = JOptionPane.showInputDialog("modificar fecha");
+
+            ((Hijo) persona).setNombre(name);
+            ((Hijo) persona).setApellido(lastname);
+            ((Hijo) persona).setRaza(nigga);
+            ((Hijo) persona).setAltura(height);
+            ((Hijo) persona).setEdad(age);
+            ((Hijo) persona).setVidasexual(life);
+            ((Hijo) persona).setApodo(nickname);
+            ((Hijo) persona).setMara(gang);
+            ((Hijo) persona).setMusica(music);
+            ((Hijo) persona).setDescripcion(descript);
+            ((Hijo) persona).setGenero(genero);
+            ((Hijo) persona).setFechanacimiento(date);
+
+        } else {
+            String name = JOptionPane.showInputDialog("Modificar nombre");
+            String lastname = JOptionPane.showInputDialog("Modificar apellido ");
+            String nigga = JOptionPane.showInputDialog("Modificar raza");
+            int height = Integer.parseInt(JOptionPane.showInputDialog("Modificar altura"));
+            int age = Integer.parseInt(JOptionPane.showInputDialog("Modificar edad"));
+            String life = JOptionPane.showInputDialog("Modificar vida sexual");
+            String nickname = JOptionPane.showInputDialog("Modificar apodo");
+            String gang = JOptionPane.showInputDialog("Modificar mara ");
+            String music = JOptionPane.showInputDialog("Modificar musica favorita");
+            String descript = JOptionPane.showInputDialog("modificar descripcion ");
+            String genero = JOptionPane.showInputDialog("modificar genero");
+            String date = JOptionPane.showInputDialog("modificar fecha");
+            String trabajo=JOptionPane.showInputDialog("modificar trabajo");
+            String clasesocial=JOptionPane.showInputDialog("modificar Clase Social");
+            String iq=JOptionPane.showInputDialog("modificar IQ");
+            String carrera=JOptionPane.showInputDialog("modificar Carrera");
+            String estado=JOptionPane.showInputDialog("modificar estado");
+            String esposa=JOptionPane.showInputDialog("modificar esposa");
+            
+            ((Padre) persona).setNombre(name);
+            ((Padre) persona).setApellido(lastname);
+            ((Padre) persona).setRaza(nigga);
+            ((Padre) persona).setAltura(height);
+            ((Padre) persona).setEdad(age);
+            ((Padre) persona).setVidasexual(life);
+            ((Padre) persona).setApodo(nickname);
+            ((Padre) persona).setMara(gang);
+            ((Padre) persona).setMusica(music);
+            ((Padre) persona).setDescripcion(descript);
+            ((Padre) persona).setGenero(genero);
+            ((Padre) persona).setFechanacimiento(date);
+            ((Padre) persona).setTrabajo(trabajo);
+            ((Padre) persona).setClasesocial(clasesocial);
+            ((Padre) persona).setIq(iq);
+            ((Padre) persona).setCarrera(carrera);
+            ((Padre) persona).setEstado(estado);
+            ((Padre) persona).setEsposa(esposa);
+        }
+    }//GEN-LAST:event_ModificarActionPerformed
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        // TODO add your handling code here:
+        DefaultMutableTreeNode n = (DefaultMutableTreeNode) arbol.getLastSelectedPathComponent();
+        DefaultTreeModel m=(DefaultTreeModel)arbol.getModel();
+        m.removeNodeFromParent(n);
+        arbol.setModel(m);
+    }//GEN-LAST:event_EliminarActionPerformed
 
     /**
      * @param args the command line arguments
